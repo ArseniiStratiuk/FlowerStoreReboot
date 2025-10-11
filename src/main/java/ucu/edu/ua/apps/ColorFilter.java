@@ -4,10 +4,10 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public class ColorFilter implements SearchFilter {
-    private FlowerColor color;
+  private FlowerColor color;
 
-    @Override
-    public boolean match(Flower flower) {
-        return flower.getColor() == color;
-    }
+  @Override
+  public boolean match(Flower flower) {
+    return flower.getColor() == color;
+  }
 }
