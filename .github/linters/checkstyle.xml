@@ -25,7 +25,7 @@
     <!-- Check that length of line is at most 80 characters. -->
     <module name="LineLength">
         <property name="max" value="80"/>
-        <property name="ignorePattern" value="^ *\* *[^ ]+$"/>
+        <property name="ignorePattern" value="^ *\* *[^ ]+$|^ */\*\*.*\*/$"/>
     </module>
 
 
