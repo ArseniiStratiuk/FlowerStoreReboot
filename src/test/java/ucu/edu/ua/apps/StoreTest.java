@@ -8,11 +8,17 @@ import org.junit.jupiter.api.Test;
 
 /** Test class for Store. */
 public final class StoreTest {
+  /** Price of a rose for testing. */
   private static final int ROSE_PRICE = 10;
+  /** Price of a chamomile for testing. */
   private static final int CHAMOMILE_PRICE = 5;
+  /** Price of a tulip for testing. */
   private static final int TULIP_PRICE = 8;
+  /** Quantity of flowers in a pack for testing. */
   private static final int PACK_QUANTITY = 10;
+  /** Minimum price for filter testing. */
   private static final int MIN_PRICE_FILTER = 7;
+  /** Maximum price for filter testing. */
   private static final int MAX_PRICE_FILTER = 11;
 
   /** The store instance being tested. */
