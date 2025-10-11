@@ -6,8 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * Represents a flower in the flower store. Contains basic attributes like sepal length, color,
- * price, and type.
+ * Represents a flower in the flower store.
+ * Contains basic attributes like sepal length, color, price, and type.
  */
 @Getter
 @Setter

@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Represents a flower store that contains flower buckets. Provides functionality to search for
- * flowers based on criteria.
+ * Represents a flower store that contains flower buckets.
+ * Provides functionality to search for flowers based on criteria.
  */
 public final class Store {
   /** The list of flower buckets in this store. */

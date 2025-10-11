@@ -5,10 +5,11 @@ import java.util.List;
 import lombok.Getter;
 
 /**
- * Represents a bucket that contains multiple flower packs. A bucket can hold various types and
- * quantities of flowers.
+ * Represents a bucket that contains multiple flower packs.
+ * A bucket can hold various types and quantities of flowers.
  */
 public final class FlowerBucket {
+  /** The list of flower packs in this bucket. */
   @Getter private List<FlowerPack> flowerPacks;
 
   /**
