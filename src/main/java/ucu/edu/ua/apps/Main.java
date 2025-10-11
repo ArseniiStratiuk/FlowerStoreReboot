@@ -1,7 +1,18 @@
 package ucu.edu.ua.apps;
 
-public class Main {
-  public static void main(String[] args) {
+/** Main class demonstrating the flower store functionality. */
+public final class Main {
+
+  private Main() {
+    // Utility class should not be instantiated
+  }
+
+  /**
+   * Main entry point for the application.
+   *
+   * @param args command line arguments
+   */
+  public static void main(final String[] args) {
     // CHECKSTYLE:OFF
     FlowerColor flowerColor = FlowerColor.RED;
     System.out.println(flowerColor); // "#FF0000"
