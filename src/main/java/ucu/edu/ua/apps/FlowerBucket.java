@@ -3,7 +3,10 @@ package ucu.edu.ua.apps;
 import java.util.ArrayList;
 import java.util.List;
 
+import lombok.Getter;
+
 public class FlowerBucket {
+    @Getter
     private List<FlowerPack> flowerPacks;
 
     public void addFlowerPack(FlowerPack flowerPack) {
