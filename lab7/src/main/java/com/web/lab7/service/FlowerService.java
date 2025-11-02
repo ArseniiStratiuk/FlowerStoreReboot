@@ -64,9 +64,9 @@ public class FlowerService {
      */
     @Transactional(readOnly = true)
     public Flower requireByType(final FlowerType type) {
-        return findFirstByType(type)
-                .orElseThrow(() -> new IllegalArgumentException(
-                        "Flower type " + type + " is not present in the catalogue"
-                ));
+    return findFirstByType(type)
+        .orElseThrow(() -> new IllegalArgumentException(
+            "Flower type " + type + " is not present in the catalogue"
+        ));
     }
 }

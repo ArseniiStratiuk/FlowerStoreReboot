@@ -20,6 +20,7 @@ public abstract class PostgresContainerTest {
         .withDatabaseName("flowerstore")
         .withUsername("flower")
         .withPassword("flower")
+        .withReuse(true)
         .waitingFor(Wait.forListeningPort())
         .withStartupTimeout(Duration.ofSeconds(60));
 
