@@ -47,7 +47,7 @@ GET http://localhost:8080/api/v1/flower
 ### Get flower by type
 GET http://localhost:8080/api/v1/flower/type/ROSE
 
-### Create a new flower
+### Create a new flower (description is auto-generated from type)
 POST http://localhost:8080/api/v1/flower
 Content-Type: application/json
 
@@ -91,7 +91,7 @@ Content-Type: application/json
 # Get all flowers
 curl http://localhost:8080/api/v1/flower
 
-# Create a flower
+# Create a flower (description auto-generated as "ROSE flower")
 curl -X POST http://localhost:8080/api/v1/flower \
   -H "Content-Type: application/json" \
   -d '{"type":"ROSE","color":"RED","sepalLength":2.5,"price":12.99}'
@@ -103,6 +103,41 @@ curl "http://localhost:8080/api/v1/delivery/simulate?method=dhl&itemType=ROSE"
 curl -X POST http://localhost:8080/api/orders \
   -H "Content-Type: application/json" \
   -d '{"items":["ROSE","TULIP"],"payment":"paypal","delivery":"post"}'
+```
+
+## Database Schema
+
+The `flowers` table has these columns:
+- `id` - Auto-generated primary key (BIGSERIAL)
+- `description` - Auto-generated from type (e.g., "ROSE flower") - **NOT NULL**
+- `flower_type` - Flower species - **NOT NULL**
+- `color` - Visual color - **NOT NULL**
+- `sepal_length` - Decimal value in centimeters
+- `price` - Decimal value - **NOT NULL**
+
+**Important:** When creating flowers via the REST API, the `description` is automatically set based on the `type` field (e.g., `"ROSE"` → `"ROSE flower"`). You don't need to provide it in the JSON payload.
+
+### Resetting the Database
+
+If you encounter errors like "null value in column 'description'", your database schema is outdated. Reset it:
+
+```bash
+cd lab7
+docker-compose down -v     # Delete volume and all data
+docker-compose up -d       # Restart with fresh database
+./mvnw spring-boot:run     # Recreate schema and seed data
+```
+
+### Manual SQL in DBeaver
+
+If inserting flowers manually via SQL, include the description and use valid enum values:
+
+```sql
+-- Correct way (must use exact enum values: RED, GREEN, BLUE, WHITE, YELLOW)
+INSERT INTO flowers (flower_type, color, sepal_length, price, description)
+VALUES ('ROSE', 'RED', 2.3, 15.0, 'ROSE flower');
+
+-- Or let the API handle it (recommended - validates automatically)
 ```
 
 ## Running Tests

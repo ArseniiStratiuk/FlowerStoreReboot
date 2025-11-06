@@ -7,7 +7,7 @@ GET http://localhost:8080/api/v1/flower/type/ROSE
 ### Get flower by type - TULIP
 GET http://localhost:8080/api/v1/flower/type/TULIP
 
-### Create a new flower
+### Create a new flower (description auto-generated from type)
 POST http://localhost:8080/api/v1/flower
 Content-Type: application/json
 
@@ -29,6 +29,17 @@ Content-Type: application/json
   "price": 8.50
 }
 
+### Create a cactus
+POST http://localhost:8080/api/v1/flower
+Content-Type: application/json
+
+{
+  "type": "CACTUS",
+  "color": "GREEN",
+  "sepalLength": 0.5,
+  "price": 5.50
+}
+
 ### List delivery methods
 GET http://localhost:8080/api/v1/delivery
 
@@ -46,6 +57,28 @@ GET http://localhost:8080/api/v1/payment/simulate?method=credit-card&amount=100
 
 ### Simulate payment - PayPal
 GET http://localhost:8080/api/v1/payment/simulate?method=paypal&amount=50.75
+
+### Create a white romashka
+POST http://localhost:8080/api/v1/flower
+Content-Type: application/json
+
+{
+  "type": "ROMASHKA",
+  "color": "WHITE",
+  "sepalLength": 1.0,
+  "price": 3.50
+}
+
+### Create a blue tulip
+POST http://localhost:8080/api/v1/flower
+Content-Type: application/json
+
+{
+  "type": "TULIP",
+  "color": "BLUE",
+  "sepalLength": 2.0,
+  "price": 7.00
+}
 
 ### Create an order
 POST http://localhost:8080/api/orders
