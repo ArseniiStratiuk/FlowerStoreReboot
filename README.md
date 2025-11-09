@@ -32,7 +32,7 @@ docker-compose up -d
 
 ### Heroku Deployment
 
-Application is deployed at: **https://flower-store-reboot-oop-ad9a74de098a.herokuapp.com**
+Application is deployed at: **<https://flower-store-reboot-oop-ad9a74de098a.herokuapp.com>**
 
 ## API Endpoints
 
@@ -49,7 +49,7 @@ Application is deployed at: **https://flower-store-reboot-oop-ad9a74de098a.herok
 | GET | `/api/v1/users` | Get all users |
 | POST | `/api/v1/users` | Register a new user |
 
-### Orders & Services
+### Orders and Services
 | Method | Path | Description |
 |--------|------|-------------|
 | POST | `/api/orders` | Create an order |
@@ -156,7 +156,7 @@ The test.http file includes examples for both local and Heroku environments.
 ### Database Inspection
 
 **DBeaver Connection:**
-```
+```properties
 Host: localhost
 Port: 5432
 Database: flowerstore
