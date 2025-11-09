@@ -7,6 +7,44 @@ GET http://localhost:8080/api/v1/flower/type/ROSE
 ### Get flower by type - TULIP
 GET http://localhost:8080/api/v1/flower/type/TULIP
 
+###
+### === USER ENDPOINTS ===
+###
+
+### Get all users
+GET http://localhost:8080/api/v1/users
+
+### Create a new user
+POST http://localhost:8080/api/v1/users
+Content-Type: application/json
+
+{
+  "email": "john.doe@example.com",
+  "dob": "1995-03-15"
+}
+
+### Create another user
+POST http://localhost:8080/api/v1/users
+Content-Type: application/json
+
+{
+  "email": "jane.smith@example.com",
+  "dob": "1998-07-22"
+}
+
+### Try to create duplicate user (should fail)
+POST http://localhost:8080/api/v1/users
+Content-Type: application/json
+
+{
+  "email": "john.doe@example.com",
+  "dob": "1990-01-01"
+}
+
+###
+### === FLOWER ENDPOINTS ===
+###
+
 ### Create a new flower (description auto-generated from type)
 POST http://localhost:8080/api/v1/flower
 Content-Type: application/json
