@@ -1,42 +1,94 @@
-# Flower Store Demo
+# Flower Store Application
 
-Spring Boot application with PostgreSQL backend exposing REST APIs for browsing flowers, simulating deliveries/payments, and creating demo orders.
+Spring Boot REST API for a flower store with user management, order processing, and delivery/payment simulations.
+
+**Live Demo:** [https://flower-store-reboot-oop-ad9a74de098a.herokuapp.com](https://flower-store-reboot-oop-ad9a74de098a.herokuapp.com)
+
+## Features
+
+- **Flower Catalog** - Browse and manage flowers with types (Rose, Tulip, Romashka, Cactus)
+- **User Management** - Register users with email validation and auto-calculated age
+- **Order Processing** - Create orders with delivery and payment strategies
+- **Delivery Simulation** - Post and DHL delivery options
+- **Payment Simulation** - Credit card and PayPal payment methods
+- **PostgreSQL Database** - Full persistence with JPA/Hibernate
+- **Design Patterns** - Strategy pattern (delivery/payment), Decorator pattern (item decorators)
 
 ## Quick Start
 
-### Using Docker Compose (Recommended)
+### Local Development
+
 ```bash
 cd lab7
-docker-compose up -d  # Start PostgreSQL
+
+# Start PostgreSQL
+docker-compose up -d
+
+# Run application
 ./mvnw spring-boot:run
+
+# Application runs at http://localhost:8080
 ```
 
-### Manual PostgreSQL Setup
-```bash
-docker run --name oop-course \
-  -e POSTGRES_PASSWORD=postgres \
-  -e POSTGRES_DB=flowerstore \
-  -d -p 5432:5432 postgres
-cd lab7
-./mvnw spring-boot:run
-```
+### Heroku Deployment
 
-Application listens on `http://localhost:8080`.
+Application is deployed at: **https://flower-store-reboot-oop-ad9a74de098a.herokuapp.com**
 
 ## API Endpoints
 
+### Flowers
 | Method | Path | Description |
-| ------ | ---- | ----------- |
-| GET | `/api/v1/flower` | Get all flowers from database |
+|--------|------|-------------|
+| GET | `/api/v1/flower` | Get all flowers |
 | POST | `/api/v1/flower` | Create a new flower |
-| GET | `/api/v1/flower/type/{type}` | Get first flower of specific type |
-| GET | `/api/v1/delivery` | List available delivery methods |
-| GET | `/api/v1/delivery/simulate` | Simulate delivery |
-| GET | `/api/v1/payment` | List available payment methods |
-| GET | `/api/v1/payment/simulate` | Simulate payment |
-| POST | `/api/orders` | Process an order |
+| GET | `/api/v1/flower/type/{type}` | Get flower by type |
 
-## Testing with test.http
+### Users
+| Method | Path | Description |
+|--------|------|-------------|
+| GET | `/api/v1/users` | Get all users |
+| POST | `/api/v1/users` | Register a new user |
+
+### Orders & Services
+| Method | Path | Description |
+|--------|------|-------------|
+| POST | `/api/orders` | Create an order |
+| GET | `/api/v1/delivery` | List delivery methods |
+| GET | `/api/v1/delivery/simulate` | Simulate delivery |
+| GET | `/api/v1/payment` | List payment methods |
+| GET | `/api/v1/payment/simulate` | Simulate payment |
+
+## Testing the API
+
+### Quick Test Commands
+
+```bash
+# Heroku (Live)
+HEROKU_URL="https://flower-store-reboot-oop-ad9a74de098a.herokuapp.com"
+
+# Get all flowers
+curl $HEROKU_URL/api/v1/flower
+
+# Create a user
+curl -X POST $HEROKU_URL/api/v1/users \
+  -H "Content-Type: application/json" \
+  -d '{"email":"test@example.com","dob":"2000-01-15"}'
+
+# Get all users
+curl $HEROKU_URL/api/v1/users
+
+# Create a flower
+curl -X POST $HEROKU_URL/api/v1/flower \
+  -H "Content-Type: application/json" \
+  -d '{"type":"ROSE","color":"RED","sepalLength":2.5,"price":15.99}'
+
+# Create an order
+curl -X POST $HEROKU_URL/api/orders \
+  -H "Content-Type: application/json" \
+  -d '{"items":["ROSE","TULIP"],"payment":"credit-card","delivery":"dhl"}'
+```
+
+### Using test.http File
 
 Create a `test.http` file in your project root with these requests:
 
@@ -82,76 +134,51 @@ Content-Type: application/json
 ```
 
 **Using test.http in IntelliJ IDEA / VS Code:**
-- IntelliJ IDEA: Open the file and click the green play button next to each request
-- VS Code: Install the "REST Client" extension by Huachao Mao, then click "Send Request" above each `###` section
+- IntelliJ IDEA: Open [`lab7/test.http`](lab7/test.http) and click the green play button next to each request
+- VS Code: Install the "REST Client" extension, open [`lab7/test.http`](lab7/test.http), click "Send Request"
 
-## Example curl Commands
-
-```bash
-# Get all flowers
-curl http://localhost:8080/api/v1/flower
-
-# Create a flower (description auto-generated as "ROSE flower")
-curl -X POST http://localhost:8080/api/v1/flower \
-  -H "Content-Type: application/json" \
-  -d '{"type":"ROSE","color":"RED","sepalLength":2.5,"price":12.99}'
-
-# Simulate delivery
-curl "http://localhost:8080/api/v1/delivery/simulate?method=dhl&itemType=ROSE"
-
-# Process order
-curl -X POST http://localhost:8080/api/orders \
-  -H "Content-Type: application/json" \
-  -d '{"items":["ROSE","TULIP"],"payment":"paypal","delivery":"post"}'
-```
+The test.http file includes examples for both local and Heroku environments.
 
 ## Database Schema
 
-The `flowers` table has these columns:
-- `id` - Auto-generated primary key (BIGSERIAL)
-- `description` - Auto-generated from type (e.g., "ROSE flower") - **NOT NULL**
-- `flower_type` - Flower species - **NOT NULL**
-- `color` - Visual color - **NOT NULL**
-- `sepal_length` - Decimal value in centimeters
-- `price` - Decimal value - **NOT NULL**
+**Available Types:** `ROSE`, `TULIP`, `ROMASHKA`, `CACTUS`  
+**Available Colors:** `RED`, `GREEN`, `BLUE`, `WHITE`, `YELLOW`
 
-**Important:** When creating flowers via the REST API, the `description` is automatically set based on the `type` field (e.g., `"ROSE"` → `"ROSE flower"`). You don't need to provide it in the JSON payload.
+**Note:** `description` is auto-generated from type ("ROSE flower")
 
-### Resetting the Database
+### Users Table (`app_users`)
 
-If you encounter errors like "null value in column 'description'", your database schema is outdated. Reset it:
+**Key Features:**
+- `email` has UNIQUE constraint (prevents duplicates)
+- `age` is calculated dynamically from `dob` using `@Transient` (not stored in DB)
+- Age calculation: `Period.between(dob, LocalDate.now()).getYears()`
 
-```bash
-cd lab7
-docker-compose down -v     # Delete volume and all data
-docker-compose up -d       # Restart with fresh database
-./mvnw spring-boot:run     # Recreate schema and seed data
+### Database Inspection
+
+**DBeaver Connection:**
 ```
-
-### Manual SQL in DBeaver
-
-If inserting flowers manually via SQL, include the description and use valid enum values:
-
-```sql
--- Correct way (must use exact enum values: RED, GREEN, BLUE, WHITE, YELLOW)
-INSERT INTO flowers (flower_type, color, sepal_length, price, description)
-VALUES ('ROSE', 'RED', 2.3, 15.0, 'ROSE flower');
-
--- Or let the API handle it (recommended - validates automatically)
-```
-
-## Running Tests
-
-```bash
-cd lab7
-./mvnw test              # Run all tests
-./mvnw checkstyle:check  # Check code style
+Host: localhost
+Port: 5432
+Database: flowerstore
+Username: postgres
+Password: postgres
 ```
 
 ## Architecture
 
-- **API Layer**: REST controllers in `com.web.lab7.controller`
-- **Service Layer**: Business logic in `com.web.lab7.service`
-- **Data Access Layer**: JPA repositories in `com.web.lab7.repository`
-- **Database**: PostgreSQL with JPA/Hibernate
-- **Patterns**: Strategy (Payment/Delivery), Decorator (Item decorators)
+**Design Patterns:**
+- **Strategy Pattern**: Delivery (Post, DHL) and Payment (CreditCard, PayPal) strategies
+- **Decorator Pattern**: Item decorators (Paper, Basket, Ribbon) for price calculation
+- **DTO Pattern**: Request/Response objects for API layer
+- **Repository Pattern**: JPA repositories for data access
+
+## Technologies Used
+
+- **Backend**: Spring Boot 3.5.7, Java 17
+- **Database**: PostgreSQL 16 (via Testcontainers for tests, Docker Compose for local, Heroku Postgres for production)
+- **ORM**: Hibernate/JPA
+- **Testing**: JUnit 5, Spring Boot Test, Testcontainers
+- **Build**: Maven
+- **Code Quality**: Checkstyle
+- **Deployment**: Heroku
+- **CI/CD**: GitHub Actions

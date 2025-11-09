@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flower Store API</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 900px;
+            width: 100%;
+            padding: 40px;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            color: #667eea;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+        
+        .status {
+            background: #10b981;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+        
+        .section {
+            margin-bottom: 30px;
+        }
+        
+        h2 {
+            color: #764ba2;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+        }
+        
+        .endpoint-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        
+        .endpoint {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+            transition: transform 0.2s;
+        }
+        
+        .endpoint:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+        }
+        
+        .method {
+            font-weight: 700;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-right: 8px;
+        }
+        
+        .get { background: #10b981; }
+        .post { background: #3b82f6; }
+        
+        .path {
+            font-family: 'Courier New', monospace;
+            color: #374151;
+            font-size: 0.9rem;
+        }
+        
+        .desc {
+            color: #6b7280;
+            font-size: 0.85rem;
+            margin-top: 5px;
+        }
+        
+        .db-info {
+            background: #fef3c7;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #f59e0b;
+        }
+        
+        .db-table {
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #374151;
+        }
+        
+        .try-it {
+            background: #667eea;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 30px;
+            cursor: pointer;
+            transition: background 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            width: 100%;
+        }
+        
+        .try-it:hover {
+            background: #764ba2;
+        }
+        
+        code {
+            background: #f3f4f6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+        
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .tech-badge {
+            background: #e0e7ff;
+            color: #4338ca;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        footer {
+            text-align: center;
+            color: #9ca3af;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e5e7eb;
+        }
+        
+        a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Flower Store API</h1>
+        <p class="subtitle">Modern REST API for flower store management</p>
+        
+        <div class="status">
+            System Online - All Services Running
+        </div>
+        
+        <div class="section">
+            <h2>Quick Start</h2>
+            <p>Try the API endpoints below. Full documentation available in <a href="https://github.com/ArseniiStratiuk/FlowerStoreReboot" target="_blank">GitHub README</a>.</p>
+        </div>
+        
+        <div class="section">
+            <h2>Flower Endpoints</h2>
+            <div class="endpoint-grid">
+                <div class="endpoint">
+                    <div>
+                        <span class="method get">GET</span>
+                        <span class="path">/api/v1/flower</span>
+                    </div>
+                    <div class="desc">Get all flowers from catalog</div>
+                </div>
+                <div class="endpoint">
+                    <div>
+                        <span class="method post">POST</span>
+                        <span class="path">/api/v1/flower</span>
+                    </div>
+                    <div class="desc">Add a new flower</div>
+                </div>
+                <div class="endpoint">
+                    <div>
+                        <span class="method get">GET</span>
+                        <span class="path">/api/v1/flower/type/{type}</span>
+                    </div>
+                    <div class="desc">Get flower by type (ROSE, TULIP, etc.)</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>User Endpoints</h2>
+            <div class="endpoint-grid">
+                <div class="endpoint">
+                    <div>
+                        <span class="method get">GET</span>
+                        <span class="path">/api/v1/users</span>
+                    </div>
+                    <div class="desc">List all registered users</div>
+                </div>
+                <div class="endpoint">
+                    <div>
+                        <span class="method post">POST</span>
+                        <span class="path">/api/v1/users</span>
+                    </div>
+                    <div class="desc">Register new user (auto-calculates age)</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Order & Services</h2>
+            <div class="endpoint-grid">
+                <div class="endpoint">
+                    <div>
+                        <span class="method post">POST</span>
+                        <span class="path">/api/orders</span>
+                    </div>
+                    <div class="desc">Create order with delivery & payment</div>
+                </div>
+                <div class="endpoint">
+                    <div>
+                        <span class="method get">GET</span>
+                        <span class="path">/api/v1/delivery</span>
+                    </div>
+                    <div class="desc">List delivery methods (Post, DHL)</div>
+                </div>
+                <div class="endpoint">
+                    <div>
+                        <span class="method get">GET</span>
+                        <span class="path">/api/v1/payment</span>
+                    </div>
+                    <div class="desc">List payment methods (Card, PayPal)</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Database Info</h2>
+            <div class="db-info">
+                <p><strong>PostgreSQL Database with 2 tables:</strong></p>
+                <div class="db-table">
+                    <p><strong>flowers</strong> - id, type, color, sepal_length, price, description</p>
+                    <p style="margin-top: 8px;"><strong>app_users</strong> - id, email (unique), dob, age (calculated via @Transient)</p>
+                </div>
+                <p style="margin-top: 15px;">
+                    Available flower types: <code>ROSE</code>, <code>TULIP</code>, <code>ROMASHKA</code>, <code>CACTUS</code><br>
+                    Available colors: <code>RED</code>, <code>GREEN</code>, <code>BLUE</code>, <code>WHITE</code>, <code>YELLOW</code>
+                </p>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Tech Stack</h2>
+            <div class="tech-stack">
+                <span class="tech-badge">Spring Boot 3.5.7</span>
+                <span class="tech-badge">Java 17</span>
+                <span class="tech-badge">PostgreSQL</span>
+                <span class="tech-badge">JPA/Hibernate</span>
+                <span class="tech-badge">Maven</span>
+                <span class="tech-badge">Heroku</span>
+                <span class="tech-badge">Docker</span>
+                <span class="tech-badge">JUnit 5</span>
+            </div>
+        </div>
+        
+        <a href="/api/v1/flower" class="try-it">
+            Try API: View All Flowers
+        </a>
+        
+        <footer>
+            <p>Built with care by <a href="https://github.com/ArseniiStratiuk" target="_blank">Arsenii Stratiuk</a></p>
+            <p style="margin-top: 5px;">
+                <a href="https://github.com/ArseniiStratiuk/FlowerStoreReboot" target="_blank">View Documentation</a> • 
+                <a href="https://github.com/ArseniiStratiuk/FlowerStoreReboot/blob/main/lab7/test.http" target="_blank">Test Examples</a>
+            </p>
+        </footer>
+    </div>
+</body>
+</html>

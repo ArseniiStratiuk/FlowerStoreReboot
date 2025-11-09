@@ -1,21 +1,78 @@
+###
+### HEROKU DEPLOYMENT
+###
+
+@heroku_url = https://flower-store-reboot-oop-ad9a74de098a.herokuapp.com
+
+### Get all flowers (HEROKU)
+GET {{heroku_url}}/api/v1/flower
+
+### Get all users (HEROKU)
+GET {{heroku_url}}/api/v1/users
+
+### Create user on Heroku
+POST {{heroku_url}}/api/v1/users
+Content-Type: application/json
+
+{
+  "email": "heroku.user@example.com",
+  "dob": "1995-05-15"
+}
+
+### Create flower on Heroku
+POST {{heroku_url}}/api/v1/flower
+Content-Type: application/json
+
+{
+  "type": "ROSE",
+  "color": "BLUE",
+  "sepalLength": 3.0,
+  "price": 18.99
+}
+
+### Create order on Heroku
+POST {{heroku_url}}/api/orders
+Content-Type: application/json
+
+{
+  "items": ["ROSE", "TULIP"],
+  "payment": "credit-card",
+  "delivery": "dhl"
+}
+
+### Simulate delivery (HEROKU)
+GET {{heroku_url}}/api/v1/delivery/simulate?method=dhl&itemType=ROSE
+
+### Simulate payment (HEROKU)
+GET {{heroku_url}}/api/v1/payment/simulate?method=paypal&amount=50.00
+
+###
+### LOCAL DEVELOPMENT
+###
+
+@local_url = http://localhost:8080
+
 ### Get all flowers
-GET http://localhost:8080/api/v1/flower
+GET {{local_url}}/api/v1/flower
+
+### Get all flowers
+GET {{local_url}}/api/v1/flower
 
 ### Get flower by type
-GET http://localhost:8080/api/v1/flower/type/ROSE
+GET {{local_url}}/api/v1/flower/type/ROSE
 
 ### Get flower by type - TULIP
-GET http://localhost:8080/api/v1/flower/type/TULIP
+GET {{local_url}}/api/v1/flower/type/TULIP
 
 ###
 ### === USER ENDPOINTS ===
 ###
 
 ### Get all users
-GET http://localhost:8080/api/v1/users
+GET {{local_url}}/api/v1/users
 
 ### Create a new user
-POST http://localhost:8080/api/v1/users
+POST {{local_url}}/api/v1/users
 Content-Type: application/json
 
 {
@@ -24,7 +81,7 @@ Content-Type: application/json
 }
 
 ### Create another user
-POST http://localhost:8080/api/v1/users
+POST {{local_url}}/api/v1/users
 Content-Type: application/json
 
 {
@@ -33,7 +90,7 @@ Content-Type: application/json
 }
 
 ### Try to create duplicate user (should fail)
-POST http://localhost:8080/api/v1/users
+POST {{local_url}}/api/v1/users
 Content-Type: application/json
 
 {
@@ -46,7 +103,7 @@ Content-Type: application/json
 ###
 
 ### Create a new flower (description auto-generated from type)
-POST http://localhost:8080/api/v1/flower
+POST {{local_url}}/api/v1/flower
 Content-Type: application/json
 
 {
@@ -57,7 +114,7 @@ Content-Type: application/json
 }
 
 ### Create another flower
-POST http://localhost:8080/api/v1/flower
+POST {{local_url}}/api/v1/flower
 Content-Type: application/json
 
 {
@@ -68,7 +125,7 @@ Content-Type: application/json
 }
 
 ### Create a cactus
-POST http://localhost:8080/api/v1/flower
+POST {{local_url}}/api/v1/flower
 Content-Type: application/json
 
 {
@@ -79,25 +136,25 @@ Content-Type: application/json
 }
 
 ### List delivery methods
-GET http://localhost:8080/api/v1/delivery
+GET {{local_url}}/api/v1/delivery
 
 ### Simulate delivery - DHL
-GET http://localhost:8080/api/v1/delivery/simulate?method=dhl&itemType=ROSE
+GET {{local_url}}/api/v1/delivery/simulate?method=dhl&itemType=ROSE
 
 ### Simulate delivery - Post
-GET http://localhost:8080/api/v1/delivery/simulate?method=post&itemType=TULIP
+GET {{local_url}}/api/v1/delivery/simulate?method=post&itemType=TULIP
 
 ### List payment methods
-GET http://localhost:8080/api/v1/payment
+GET {{local_url}}/api/v1/payment
 
 ### Simulate payment - Credit Card
-GET http://localhost:8080/api/v1/payment/simulate?method=credit-card&amount=100
+GET {{local_url}}/api/v1/payment/simulate?method=credit-card&amount=100
 
 ### Simulate payment - PayPal
-GET http://localhost:8080/api/v1/payment/simulate?method=paypal&amount=50.75
+GET {{local_url}}/api/v1/payment/simulate?method=paypal&amount=50.75
 
 ### Create a white romashka
-POST http://localhost:8080/api/v1/flower
+POST {{local_url}}/api/v1/flower
 Content-Type: application/json
 
 {
@@ -108,7 +165,7 @@ Content-Type: application/json
 }
 
 ### Create a blue tulip
-POST http://localhost:8080/api/v1/flower
+POST {{local_url}}/api/v1/flower
 Content-Type: application/json
 
 {
@@ -119,7 +176,7 @@ Content-Type: application/json
 }
 
 ### Create an order
-POST http://localhost:8080/api/orders
+POST {{local_url}}/api/orders
 Content-Type: application/json
 
 {
@@ -129,7 +186,7 @@ Content-Type: application/json
 }
 
 ### Create another order
-POST http://localhost:8080/api/orders
+POST {{local_url}}/api/orders
 Content-Type: application/json
 
 {
